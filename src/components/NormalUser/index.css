@@ -1,0 +1,29 @@
+.bg-container {
+    display: flex;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+.res-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.admin-list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+@media (min-width: 768px) {
+    .admin-list-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
