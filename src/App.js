@@ -10,6 +10,7 @@ import StoreOwner from './components/StoreOwner'
 import NormalUser from './components/NormalUser'
 import AddNewStore from './components/AddNewStore'
 import AddNewUser from './components/AddNewUser'
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path="/user" component={NormalUser} />
           <Route exact path="/admin/add-store" component={AddNewStore} />
           <Route exact path="/admin/add-user" component={AddNewUser} />
+          <Redirect to="/login" />
         </Switch>
       </BrowserRouter>
     )
