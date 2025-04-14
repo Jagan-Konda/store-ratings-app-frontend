@@ -1,6 +1,6 @@
 import './App.css';
 import { Component } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -10,7 +10,7 @@ import StoreOwner from './components/StoreOwner'
 import NormalUser from './components/NormalUser'
 import AddNewStore from './components/AddNewStore'
 import AddNewUser from './components/AddNewUser'
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import ProtectedRoute from './components/ProtectedRoute';
 
 class App extends Component {
   render() {
@@ -19,11 +19,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/admin" component={Admin} />
-          <Route exact path="/store-owner" component={StoreOwner} />
-          <Route exact path="/user" component={NormalUser} />
-          <Route exact path="/admin/add-store" component={AddNewStore} />
-          <Route exact path="/admin/add-user" component={AddNewUser} />
+          <ProtectedRoute exact path="/admin" component={Admin} />
+          <ProtectedRoute exact path="/store-owner" component={StoreOwner} />
+          <ProtectedRoute exact path="/user" component={NormalUser} />
+          <ProtectedRoute exact path="/admin/add-store" component={AddNewStore} />
+          <ProtectedRoute exact path="/admin/add-user" component={AddNewUser} />
           <Redirect to="/login" />
         </Switch>
       </BrowserRouter>

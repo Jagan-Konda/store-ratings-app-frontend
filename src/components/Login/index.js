@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Cookies from 'js-cookie'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import './index.css'
 
@@ -19,6 +19,7 @@ class Login extends Component {
         const { history } = this.props
         const { jwt_token, role } = data
         Cookies.set('jwt_token', jwt_token, { expires: 30 })
+        Cookies.set('role', role, { expires: 30 })
         switch (role) {
             case 'Admin':
                 history.replace('/admin')
@@ -30,7 +31,7 @@ class Login extends Component {
                 history.replace('/user')
                 break
             default:
-                alert('Something Went Wrong!')
+
 
         }
     }
@@ -56,7 +57,7 @@ class Login extends Component {
 
         const response = await fetch(apiUrl, options)
         const data = await response.json()
-        console.log(data)
+
         if (response.ok) {
             this.onSubmitSuccess(data)
 
@@ -67,13 +68,26 @@ class Login extends Component {
 
     render() {
         const { showErrMsg, errorMsg } = this.state
+        const jwtToken = Cookies.get('jwt_token')
+        const role = Cookies.get('role')
+        if (jwtToken !== undefined) {
+            switch (role) {
+                case 'Admin':
+                    return <Redirect to="/admin" />
+                case 'Normal':
+                    return <Redirect to="/user" />
+                case 'StoreOwner':
+                    return <Redirect to="/store-owner" />
+                default:
+            }
+        }
         return (
             <div className='login-bg-container'>
                 <form className='login-form' onSubmit={this.onSubmittingForm}>
                     <label htmlFor="email" className='login-label' >Email</label>
                     <input type="text" placeholder='Email' id='email' className='login-input' onChange={this.onEmailChange} />
                     <label htmlFor="password" className='login-label' >Password</label>
-                    <input type='password' placeholder='Password' className='login-input' onChange={this.onPasswordChange} />
+                    <input id='password' type='password' placeholder='Password' className='login-input' onChange={this.onPasswordChange} />
                     <button type="submit" className='btn btn-primary mt-3'>Login</button>
                     {showErrMsg && <p className='text-danger'>*{errorMsg}</p>}
                     <p className='mt-5 text-center'>Not Have An Account? <Link to="/signup">Sign Up</Link></p>

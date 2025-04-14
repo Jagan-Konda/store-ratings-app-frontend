@@ -67,11 +67,11 @@ class Admin extends Component {
         }
 
         const response = await fetch(apiUrl, options)
+        const data = await response.json()
         if (response.ok) {
-            const data = await response.json()
             this.setState({ usersList: data })
         } else {
-            alert('Something Went Wrong!')
+            alert(data.error)
         }
     }
 

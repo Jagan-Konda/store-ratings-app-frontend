@@ -89,7 +89,7 @@ class Signup extends Component {
                     <label htmlFor="email" className='login-label' >Email</label>
                     <input type="text" placeholder='Email' value={email} id='email' className='login-input' onChange={this.onEmailChange} />
                     <label htmlFor="password" className='login-label' >Password</label>
-                    <input type='password' placeholder='Password' value={password} className='login-input' onChange={this.onPasswordChange} />
+                    <input id='password' type='password' placeholder='Password' value={password} className='login-input' onChange={this.onPasswordChange} />
                     <label htmlFor='address' className='login-label'>Address</label>
                     <textarea maxLength={400} className='login-input' value={address} placeholder='Address' id='address' onChange={this.onAddressChange}></textarea>
                     <button type="submit" className='btn btn-primary mt-3'>Signup</button>
